@@ -13,6 +13,15 @@ This repository serves as a complete archive of my progress in Frontend developm
 * **Asynchronous Programming:** Professional use of `Async/Await`, `Promises`, and the `.finally()` block for UI state management.
 * **Clean Architecture:** Utilizing reusable classes like `PacoteBuscador` for API abstraction.
 
+* ---
+
+## 🔗 Connect with me
+Let's network! Feel free to reach out for collaborations or just to talk about JavaScript and Web Development.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/paulotraveler/)
+
+*Developed with passion by Paulo Desbravador.*
+
 
 
 ## 📁 Repository Structure
