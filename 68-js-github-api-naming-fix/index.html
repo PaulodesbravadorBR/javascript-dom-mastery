@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Página</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style> 
+      :root {
+        --white: #fff;
+        --black: #000;
+
+        --primary-1: #c47e35;
+        --primary-2: #dca15d;
+        --primary-3: #dabb94;
+        --primary-4: #f3dabc;
+        --primary-5: #faf1e5;
+
+        --neutral-1: #2c2c2c;
+        --neutral-2: #434343;
+        --neutral-3: #94868b;
+        --neutral-4: #d9cfd3;
+        --neutral-5: #f2ecee;
+
+        --accent-1: #458179;
+        --accent-2: #4da296;
+        --accent-3: #8dd8cf;
+        --accent-4: #92cfc7;
+        --accent-5: #d7f2ef;
+      }
+
+      body {
+        margin: 0;
+        background-color: var(--neutral-5);
+      }
+
+      h1 {
+        margin: 50px 0 30px 0;
+        font-weight: 400;
+      }
+
+      p {
+        font-weight: 300;
+      }
+
+      a {
+        color: var(--primary-2);
+        text-decoration: underline;
+        line-height: 1.4;
+        padding: 0.25em;
+      }
+
+      .btn {
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        margin: 10px;
+        padding: 10px 30px;
+        text-decoration: none;
+        max-width: 120px;
+        text-align: center;
+        display: inline-block;
+        transition: background-color 220ms, transform 220ms;
+        border: none;
+      }
+
+      .btn:active {
+        transform: translate(0.8px, 0.8px);
+      }
+
+      button.btn {
+        border: 1px solid var(--primary-3);
+      }
+
+      .btn-default {
+        color: var(--white);
+        background-color: var(--primary-1);
+      }
+
+      .btn-outline {
+        color: var(--primary-1);
+        background-color: var(--primary-4);
+        border: var(--primary-1) 2px solid;
+        box-shadow: 1px 1px 7px #c4c4c4;
+      }
+
+      .btn-active {
+        color: var(--primary-1);
+        background-color: var(--primary-4);
+      }
+
+      .btn-default:hover:not(:disabled) {
+        background-color: var(--primary-2);
+        color: white;
+      }
+
+      .btn-outline:hover:not(:disabled) {
+        background-color: var(--primary-3);
+      }
+
+      .btn-default:active {
+        color: var(--primary-1);
+        background-color: var(--primary-3);
+      }
+
+      .btn:disabled {
+        cursor: initial;
+        opacity: 0.5;
+      }
+
+      #navbar {
+        width: 100%;
+        padding: 10px 0;
+        box-shadow: 0px 3px 7px 1px rgba(0, 0, 0, 0.07),
+          0px -3px 7px 1px rgba(0, 0, 0, 0.07);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: white;
+      }
+
+      .nav-brand {
+        font-size: 40px;
+        text-decoration: none;
+        padding-left: 20px;
+      }
+
+      #navbar ul {
+        list-style-type: none;
+        overflow: hidden;
+        padding-right: 20px;
+      }
+
+      #navbar li {
+        display: inline-block;
+      }
+
+      .nav-item a {
+        text-decoration: none;
+        font-weight: bold;
+        color: var(--primary-1);
+        display: block;
+        text-align: center;
+        padding: 13px 20px;
+      }
+
+      .nav-item:hover a {
+        text-decoration: none;
+        color: var(--primary-2);
+      }
+
+      .form h2 {
+        font-size: 24px;
+        font-weight: 400;
+      }
+
+      .form h3 {
+        font-size: 20px;
+        font-weight: 300;
+        margin-bottom: 15px;
+      }
+
+      .border-form {
+        border-bottom: var(--neutral-4) solid 1px;
+        margin-bottom: 20px;
+      }
+
+      .required {
+        color: var(--primary-2);
+        text-decoration: none;
+        font-weight: bold;
+        padding: 0 1px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5em;
+        font-weight: 500;
+      }
+
+      input:not(.btn) {
+        font-size: 16px;
+        margin-bottom: 1.7em;
+        padding: 0.75em 0.5em;
+        background-color: white;
+        width: 100%;
+        max-width: 250px;
+        border: none;
+        border-left: 7px solid var(--neutral-4);
+      }
+
+      ::placeholder {
+        color: var(--neutral-4);
+      }
+
+      input:not(.btn):focus {
+        outline: none;
+        border-left: 7px solid var(--accent-1);
+      }
+
+      button {
+        margin-bottom: 1.7em;
+        max-width: 250px;
+        min-width: 150px;
+        height: 40px;
+        border: none;
+        border-left: 7px solid var(--neutral-4);
+      }
+
+      .nav-tabs {
+        position: relative;
+        margin: 0 0 40px 0;
+      }
+
+      .nav-tabs ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        padding-left: 0;
+      }
+
+      .nav-tabs li {
+        display: inline-block;
+      }
+
+      .nav-tabs a {
+        text-decoration: none;
+        color: var(--black);
+        margin-right: 20px;
+      }
+      .nav-tabs a#onlink {
+        border-bottom: 7px solid var(--accent-1);
+      }
+
+      .border-tabs {
+        position: absolute;
+        z-index: -1;
+        bottom: -3px;
+        border-bottom: var(--neutral-4) solid 1px;
+        min-width: 400px;
+      }
+
+      .tabs p {
+        max-width: 450px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0px auto;
+        padding: 0 20px;
+      }
+
+      #footer-wrapper {
+        background-color: var(--neutral-5);
+        padding: 40px 20px;
+        margin-top: 50px;
+      }
+
+      #footer-wrapper a {
+        text-decoration: none;
+      }
+
+      #repos-list {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .loading-spinner {
+        animation-duration: 0.75s;
+        animation-iteration-count: infinite;
+        animation-name: rotate-forever;
+        animation-timing-function: linear;
+        height: 12px;
+        width: 12px;
+        border: 2px solid #ffffff;
+        border-right-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      @keyframes rotate-forever {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #repos-list {
+          list-style: none;
+          padding-left: 0;
+      }
+      #repos-list li {
+          padding: 25px 20px;
+          background-color: white;
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+          margin: 15px 0;
+          border-radius: 3px;
+          transition: opacity 150ms ease-out;
+          opacity: 0.85;
+      }
+      #repos-list li:hover {
+          opacity: 1;
+      }
+      #repos-list h2 {
+          margin-top: 0;
+      }
+      #repos-list p {
+          color: #111;
+          margin-bottom: 0;
+      }
+      #repos-list a {
+          text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="" class="nav-brand">App</a>
+      <ul>
+        <li class="nav-item"><a href="about.html">Sobre nós</a></li>
+        <li><a href="" class="nav-item btn btn-default">Registro</a></li>
+      </ul>
+    </nav>
+
+    <div class="container" id="main">
+        <h1>GitHub repositórios</h1>
+         <form id="repos-form">
+            <label for="github-username">Usuário GitHub</label>
+            <input id="github-username" type="text" placeholder="GitHub username">
+            <button type="submit" id="get-repos" class="btn btn-default">Obter Repositório</button>
+        </form>
+        <ul id="repos-list"></ul>
+    </div>
+
+    <footer id="footer-wrapper">
+        <a href="about.html" target="_blank">Sobre nós</a>
+        <a href="contact.html" target="_blank">Contatos</a>
+    </footer>
+    <script>
+        // helpers
+        const startLoader = elemento => {
+            elemento.innerHTML = `<div class="loading-spinner"></div>`;
+        }
+
+        const stopLoader = (elemento, value) => {
+            elemento.textContent = value;
+        }
+
+        // model
+        class PacoteBuscador {
+            constructor(baseURL) {
+                this.baseURL = baseURL;
+            }
+
+            get(endpoint) {
+                return fetch(this.baseURL + endpoint)
+                    .then(response => response.json());
+            }
+
+            put(endpoint, body) {
+                return this._send("put", endpoint, body);
+            }
+
+            post(endpoint, body) {
+                return this._send("post", endpoint, body);
+            }
+
+            delete(endpoint, body) {
+                return this._send("delete", endpoint, body);
+            }
+
+            _send(method, endpoint, body) {
+                return fetch(this.baseURL + endpoint, {
+                    method,
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(body)
+                }).then(response => response.json());
+            }
+        }
+        
+// 1. Seletores
+const form = document.querySelector("#repos-form");
+const githubUsername = document.querySelector("#github-username");
+const reposList = document.querySelector("#repos-list");
+const botao = document.querySelector("#get-repos");
+
+// 2. Instância com o nome solicitado e sem a barra final na URL
+const GithubAPI = new PacoteBuscador("https://api.github.com");
+
+form.addEventListener("submit", event => {
+    event.preventDefault();
+
+    // Captura o valor do input (removendo espaços extras)
+    const username = githubUsername.value.trim();
+
+    // Inicia o loader no botão
+    startLoader(botao);
+
+    // 3. Chamada da API
+    // Como a URL base não tem "/", adicionamos aqui para formar ...com/users/
+    GithubAPI.get(`/users/${username}/repos`)
+        .then(data => {
+            // Limpa a lista existente
+            reposList.innerHTML = "";
+
+            // GitHub retorna um array de objetos em caso de sucesso
+            if (Array.isArray(data)) {
+                data.forEach(repo => {
+                    reposList.insertAdjacentHTML("beforeend", `
+                        <li>
+                            <a href="${repo.html_url}" target="_blank">
+                                <h2>${repo.full_name}</h2>
+                                <p>${repo.description || ""}</p>
+                            </a>
+                        </li>
+                    `);
+                });
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao buscar repositórios:", error);
+        })
+        .finally(() => {
+            // Para o loader e restaura o texto do botão
+            stopLoader(botao, "Obter Repositório");
+        });
+});    </script>
+  </body>
+</html>

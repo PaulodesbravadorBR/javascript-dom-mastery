@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doc</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+     <nav id="navbar">
+      <a href="#" class="nav-brand">App</a>
+      <ul>
+        <li class="nav-item"><a href="about.html">Sobre</a></li>
+        <li><a href="" class="nav-item btn btn-default">Registre-se</a></li>
+      </ul>
+    </nav>
+
+    <div class="container" id="main">
+        <h1>Temperatura em <span id="city">...</span></h1>
+        <select id="cities-dropdown">
+            <option value="">City</option>
+            <option value="amsterdam">Amsterdã</option>
+            <option value="berlin">Berlim</option>
+        </select>
+        <p id="result">&nbsp;</p>
+
+    </div>
+
+    <footer id="footer-wrapper">
+        <a href="about.html" target="_blank">Sobre</a>
+        <a href="contact.html" target="_blank">Contato</a>
+    </footer>
+    <script>
+        class EmpacotadorBusca {
+            constructor(baseURL) {
+                this.baseURL = baseURL;
+            }
+
+            get(endpoint) {
+                return fetch(this.baseURL + endpoint)
+                    .then(response => response.json());
+            }
+        }
+
+        const obterTemperatura = city => {
+    // 1. Instanciamos a API com a URL base (até a pasta weatherstack)
+    const API = new EmpacotadorBusca("https://jsdemo-3f387-default-rtdb.europe-west1.firebasedatabase.app/weatherstack/");
+
+    // 2. Montamos o endpoint dinamicamente usando a variável 'city'
+    // Se city for "amsterdam", o endpoint será "amsterdam.json"
+    API.get(`${city}.json`)
+        .then(data => {
+            // 3. A estrutura do Weatherstack coloca a temperatura em: data.current.temperature
+            const temperatura = data.current.temperature;
+            mostreTemperatura(temperatura);
+            
+            // Opcional: Atualiza o nome da cidade no título H1
+            document.querySelector("#city").textContent = city;
+        })
+        .catch(error => console.error("Erro ao buscar clima:", error));
+}
+
+        // Não modifique o código a seguir
+        const result = document.querySelector("#result");
+        const mostreTemperatura = temperature => {
+            result.textContent = `A temperatura é ${temperature} graus Celsius.`;
+        }
+
+        const citiesDropdown = document.querySelector("#cities-dropdown");
+
+        citiesDropdown.addEventListener("change", () => {
+            if (citiesDropdown.value) {
+                obterTemperatura(citiesDropdown.value);
+            }
+        });
+    </script>
+  </body>
+</html>

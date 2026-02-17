@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doc</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+     <nav id="navbar">
+      <a href="#" class="nav-brand">App</a>
+      <ul>
+        <li class="nav-item"><a href="about.html">Sobre</a></li>
+        <li><a href="" class="nav-item btn btn-default">Registre-se</a></li>
+      </ul>
+    </nav>
+
+    <div class="container" id="main">
+        <h1>App para Professor</h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus,
+            voluptatem.
+        </p>
+        <form id="grades-form">
+            <label for="user-grade">Nota</label>
+            <input id="user-grade" type="number" placeholder="Enter the grade (0 to 20)" min="0" max="20" step="1">
+            <input type="submit" value="Save" class="btn btn-outline">
+        </form>
+    </div>
+
+    <footer id="footer-wrapper">
+        <a href="about.html" target="_blank">Sobre</a>
+        <a href="contact.html" target="_blank">Contato</a>
+    </footer>
+    <script>
+        const salvarGrade = grade => {
+    // 1. Montamos as configurações da requisição
+    const configuracao = {
+        method: "PUT", // Método solicitado pela documentação
+        headers: {
+            "Content-Type": "application/json" // Avisa que estamos enviando JSON
+        },
+        body: JSON.stringify({
+            grade: grade // O corpo esperado pela API
+        })
+    };
+
+    // 2. Fazemos o fetch para a URL base + endpoint
+    fetch("https://api.learnjavascript.online/demo/grades.json", configuracao)
+        .then(response => {
+            if (!response.ok) {
+                // Lida com erros (como o limite de 60 segundos)
+                throw new Error("Falha ao salvar a nota.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Nota salva com sucesso:", data);
+        })
+        .catch(error => {
+            console.error("Erro de rede ou API:", error);
+        });
+};
+    </script>
+  </body>
+</html>

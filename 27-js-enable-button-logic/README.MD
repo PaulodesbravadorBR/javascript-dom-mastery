@@ -1,0 +1,1 @@
+A practical exercise on dynamic form control using Vanilla JavaScript. This project demonstrates how to use the removeAttribute method to enable previously disabled buttons, simulating real-world scenarios like form validation completion

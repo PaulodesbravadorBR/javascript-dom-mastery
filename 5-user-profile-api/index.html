@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doc</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+     <nav id="navbar">
+      <a href="#" class="nav-brand">App</a>
+      <ul>
+        <li class="nav-item"><a href="about.html">Sobre</a></li>
+        <li><a href="" class="nav-item btn btn-default">Registre-se</a></li>
+      </ul>
+    </nav>
+
+    <div class="container" id="main">
+        <h1>Perfil do Usuário</h1>
+        <p>
+           Use esta página para atualizar os detalhes do seu perfil.
+        </p>
+        <form id="user-form">
+            <label for="first-name">Nome</label>
+            <input id="first-name" type="text" value="Sam" placeholder="Entre com o seu nome">
+            <label for="last-name">Sobrenome</label>
+            <input id="last-name" type="text" value="Green" placeholder="Entre com o seu sobrenome">
+            <div>
+                <input type="submit" value="Update" class="btn btn-outline">
+            </div>
+        </form>
+    </div>
+
+    <footer id="footer-wrapper">
+        <a href="about.html" target="_blank">Sobre</a>
+        <a href="contact.html" target="_blank">Contato</a>
+    </footer>
+    <script>
+        class EmpacotadorBusca {
+            constructor(baseURL) {
+                this.baseURL = baseURL;
+            }
+
+            get(endpoint) {
+                return fetch(this.baseURL + endpoint)
+                    .then(response => response.json());
+            }
+
+            put(endpoint, body) {
+                return this._send("put", endpoint, body);
+            }
+
+            post(endpoint, body) {
+                return this._send("post", endpoint, body);
+            }
+
+            delete(endpoint, body) {
+                return this._send("delete", endpoint, body);
+            }
+
+            _send(method, endpoint, body) {
+                return fetch(this.baseURL + endpoint, {
+                    method,
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(body)
+                }).then(response => response.json());
+            }
+        }
+
+    const atualizarPerfilUsuario = (firstName, lastName) => {
+    // 1. Instanciamos a classe com a URL base fornecida
+    const API = new EmpacotadorBusca("https://api.learnjavascript.online/demo/");
+
+    // 2. Chamamos o método post()
+    // Passamos o endpoint "user.json" e o objeto com as chaves firstName e lastName
+    API.post("user.json", {
+        firstName: firstName,
+        lastName: lastName
+    }).then(data => {
+        console.log("Perfil atualizado com sucesso:", data);
+    }).catch(error => {
+        console.error("Erro ao atualizar perfil:", error);
+    });
+}
+
+        // Não modifique
+        const form = document.querySelector("#user-form");
+        const fName = document.querySelector("#first-name");
+        const lName = document.querySelector("#last-name");
+
+        form.addEventListener("submit", event => {
+            event.preventDefault();
+
+            atualizarPerfilUsuario(fName.value, lName.value);
+        });
+    </script>
+  </body>
+</html>

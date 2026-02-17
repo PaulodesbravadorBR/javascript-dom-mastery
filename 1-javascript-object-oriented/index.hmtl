@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doc</title>
+  <style>
+  </style>
+ </head>
+ <body>
+  <nav id="navbar">
+   <a href="" class="nav-brand">App</a>
+   <ul>
+    <li class="nav-item"><a href="about.html">Sobre</a></li>
+    <li><a href="" class="nav-item btn btn-default">Registrar</a></li>
+   </ul>
+  </nav>
+
+  <div class="container" id="main">
+    <h1>Bem vindo ao nosso app</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus,
+      voluptatem.
+    </p>
+
+    <form id="form-dos-afazeres">
+      <label for="titulo-dos-afazeres">Afazeres</label>
+      <input id="titulo-dos-afazeres" type="text" placeholder="Entre com o seu afazer">
+      <select id="categoria-de-afazeres">
+        <option value="trabalho">Trabalho</option>
+        <option value="pessoal">Pessoal</option>
+      </select>
+      <input type="submit" class="btn btn-outline" value="Adicionar" />
+    </form>
+    <hr class="separator" />
+    <div>
+      <label>
+        Filtro:
+        <select id="filtro-do-afazeres">
+          <option value="">Mostre tudo</option>
+          <option value="trabalho">Apenas o trabalho</option>
+          <option value="pessoal">Apenas o pessoal</option>
+        </select>
+      </label>
+      <h3>Todos <span id="contagem-de-afazeres"></span></h3>
+      <ul id="lista-de-afazeres"></ul>
+    </div>
+  </div>
+
+  <footer id="footer-wrapper">
+    <a href="about.html" target="_blank">Sobre</a>
+    <a href="contact.html" target="_blank">Contato</a>
+  </footer>
+  <script>
+      class Todos {
+  constructor() {
+    this.afazeres = [{
+      titulo: "Curso de JavaScript",
+      categoria: "trabalho"
+    }, {
+      titulo: "Meditação",
+      categoria: "pessoal"
+    }];
+  }
+
+  // 1. Retorna a lista completa
+  obterTudo() {
+    return this.afazeres;
+  }
+
+  // 2. Retorna o tamanho da lista (número)
+  obterContagem() {
+    return this.afazeres.length;
+  }
+
+  // 3. Adiciona um novo objeto à lista
+  adicionar(titulo, categoria) {
+    // Criamos um novo objeto com os dados recebidos e damos um 'push' na matriz
+    this.afazeres.push({ titulo, categoria });
+  }
+
+  // 4. Filtra apenas os de categoria "trabalho"
+  obterTrabalho() {
+    return this.afazeres.filter(todo => todo.categoria === "trabalho");
+  }
+
+  // 5. Usa o método anterior para contar (DRY - Don't Repeat Yourself)
+  obterContagemDeTrabalho() {
+    return this.obterTrabalho().length;
+  }
+
+  // 6. Filtra apenas os de categoria "pessoal"
+  obterPessoal() {
+    return this.afazeres.filter(todo => todo.categoria === "pessoal");
+  }
+
+  // 7. Usa o método anterior para contar (Já estava implementado no seu exemplo)
+  obterContagemPessoal() {
+    return this.obterPessoal().length;
+  }
+}
+        
+    const form = document.querySelector("#form-dos-afazeres");
+    const titulo = document.querySelector("#titulo-dos-afazeres");
+    const categoria = document.querySelector("#categoria-de-afazeres");
+    const lista = document.querySelector("#lista-de-afazeres");
+    const filtro = document.querySelector("#filtro-do-afazeres");
+    const contagem = document.querySelector("#contagem-de-afazeres");
+
+    const render = (itens, contagemDeItens) => {
+      contagem.textContent = `(${contagemDeItens})`;
+      lista.innerHTML = itens.map(todo => `<li>${todo.titulo} [${todo.categoria}]</li>`).join("");
+    }
+
+    const afazeres = new Todos();
+
+    try {
+      render(afazeres.obterTudo(), afazeres.obterContagem());
+    } catch (error) {
+      console.error(error);
+    }
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      try {
+        afazeres.adicionar(titulo.value, categoria.value);
+        render(afazeres.obterTudo(), afazeres.obterContagem());
+      } catch (error) {
+        console.error(error);
+      }
+      titulo.value = "";
+    });
+
+    filtro.addEventListener("change", () => {
+      try {
+        if (filtro.value === "trabalho") {
+          // filtro trabalho
+          render(afazeres.obterTrabalho(), afazeres.obterContagemDeTrabalho());
+        } else if (filtro.value === "pessoal") {
+          // filtro pessoal
+          render(afazeres.obterPessoal(), afazeres.obterContagemPessoal());
+        } else {
+          // mostrar tudo
+          render(afazeres.obterTudo(), afazeres.obterContagem());
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+  </script>
+ </body>
+</html>

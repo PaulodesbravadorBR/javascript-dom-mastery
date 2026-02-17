@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doc</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+     <nav id="navbar">
+      <a href="#" class="nav-brand">App</a>
+      <ul>
+        <li class="nav-item"><a href="about.html">Sobre</a></li>
+        <li><a href="" class="nav-item btn btn-default">Registre-se</a></li>
+      </ul>
+    </nav>
+
+    <div class="container" id="main">
+        <h1>Perfil do Usuário</h1>
+        <p>
+            Use esta página para atualizar os detalhes do seu perfil.
+        </p>
+        <form id="user-form">
+            <label for="first-name">Nome</label>
+            <input id="first-name" type="text" value="Sam" placeholder="Enter your first name">
+            <label for="last-name">Sobrenome</label>
+            <input id="last-name" type="text" value="Green" placeholder="Enter your last name">
+            <div>
+                <input type="submit" value="Update" class="btn btn-outline">
+            </div>
+        </form>
+    </div>
+
+    <footer id="footer-wrapper">
+        <a href="about.html" target="_blank">Sobre</a>
+        <a href="contact.html" target="_blank">Contato</a>
+    </footer>
+    <script>
+       const updateUserProfile = (firstName, lastName) => {
+    // 1. Definimos a URL completa
+    const url = "https://api.learnjavascript.online/demo/user.json";
+
+    // 2. Criamos o objeto de configuração para o POST
+    const options = {
+        method: "POST", // Método exigido pela documentação
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            firstName: firstName, // O nome vindo do formulário
+            lastName: lastName    // O sobrenome vindo do formulário
+        })
+    };
+
+    // 3. Executamos a requisição com tratamento de erros
+    fetch(url, options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Falha ao atualizar perfil. Verifique se a API não está em cooldown (60s).");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Perfil atualizado com sucesso:", data);
+        })
+        .catch(error => {
+            console.error("Erro na requisição:", error);
+        });
+}
+    </script>
+  </body>
+</html>

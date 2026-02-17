@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Página</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body> 
+    <script>
+      const criarAvatar = (url, nomeDaClasse) => {
+    // 1. Create the 'img' element node
+    const img = document.createElement("img");
+    
+    // 2. Set the source attribute
+    img.src = url;
+    
+    // 3. Add the specific class name
+    img.classList.add(nomeDaClasse);
+    
+    // 4. Return the actual DOM element object
+    return img;
+}
+
+      // amostra
+      console.log(criarAvatar("/avatar/person.png", "circle")); // <img src="/avatar/person.png" class="circle"> (como um elemento não uma string)
+      console.log(criarAvatar("/avatar/user.png", "rounded")); // <img src="/avatar/user.png" class="rounded"> (como um elemento não uma string)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+A practical guide to managing HTML attributes using Vanilla JavaScript. This project demonstrates how to use hasAttribute, getAttribute, and setAttribute to programmatically check and modify element states, such as enabling or disabling buttons based on specific logic.
